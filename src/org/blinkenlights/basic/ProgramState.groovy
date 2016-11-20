@@ -57,7 +57,7 @@ class ProgramState {
         if (currentForState.variableName != variableName) {
             throw new Exception("FOR and NEXT variable name mismatch.  Expected $currentForState.variableName, got $variableName")
         }
-        variables[variableName] = variables[variableName]++
+        variables[variableName] = variables[variableName] + 1
         if (variables[variableName] <= currentForState.toValue) {
             currentLineNumber = currentForState.startingLineNumber
         }

@@ -89,7 +89,7 @@ class TreeVisitor extends BasicBaseVisitor<Expression> {
     @Override
     Expression visitPrintStatement(BasicParser.PrintStatementContext ctx) {
         def arg = ctx.arg().getText()
-        def printStatement = new PrintStatement(variableName: arg)
+        def printStatement = new PrintStatement(arg: arg)
         statements[currentLineNumber] = printStatement
 
         super.visitPrintStatement(ctx)
