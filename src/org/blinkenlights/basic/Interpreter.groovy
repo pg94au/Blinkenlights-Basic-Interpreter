@@ -7,7 +7,7 @@ class Interpreter {
         def programState = new ProgramState(statements);
 
         while (!programState.finished()) {
-            def statement = statements.get(programState._currentLineNumber);
+            def statement = statements.get(programState.currentLineNumber);
 
             if (statement != null) {
                 statement.execute(programState);

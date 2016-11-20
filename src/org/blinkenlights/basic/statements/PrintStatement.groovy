@@ -7,6 +7,6 @@ class PrintStatement implements Statement {
 
     @Override
     void execute(ProgramState programState) {
-        programState.nextFor(variableName)
+        println programState.readVariable(variableName)
     }
 }

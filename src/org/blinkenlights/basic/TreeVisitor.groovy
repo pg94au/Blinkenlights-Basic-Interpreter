@@ -142,7 +142,7 @@ class TreeVisitor extends BasicBaseVisitor<Expression> {
 
     @Override
     Expression visitParentheses(BasicParser.ParenthesesContext ctx) {
-        var parentheses = visit(ctx.expression())
+        def parentheses = visit(ctx.expression())
         parentheses
     }
 }
