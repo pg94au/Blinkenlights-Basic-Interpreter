@@ -44,32 +44,6 @@ public class BasicInterpreterApp {
 """
 
         def programStream = new ByteArrayInputStream(program.getBytes());
-//        StringBuilder sbProgram = new StringBuilder();
-//        sbProgram.append("1 FOR X=1 TO 3\n");
-//        sbProgram.append("2 PRINT \"X Looping\"\n");
-//        sbProgram.append("3 FOR Y=1 TO 2\n");
-//        sbProgram.append("4 PRINT \"Y Looping\"\n");
-//        sbProgram.append("5 NEXT Y\n");
-//        sbProgram.append("9 NEXT X\n");
-//
-//        sbProgram.append("10 PRINT \"Call Subroutine\"\n");
-//        sbProgram.append("11 LET A = 100\n");
-//        sbProgram.append("12 LET B = 12 + 23\n");
-//        sbProgram.append("13 LET C = 12 + 23 - 34\n");
-//        sbProgram.append("14 LET D = 3 * 6\n");
-//        sbProgram.append("15 LET E = 8 / 2\n");
-//        sbProgram.append("16 LET F = 2 + (3 * 3)\n");
-//        sbProgram.append("17 LET G = 3 * ((8 / 2 + 4) * 5 - 2)\n"); // 114
-//
-//        sbProgram.append("20 GOSUB 1000\n");
-//        sbProgram.append("30 PRINT \"Returned from Subroutine\"\n");
-//        sbProgram.append("35 GOTO 2000\n");
-//        sbProgram.append("1000 PRINT \"In Subroutine\"\n");
-//        sbProgram.append("1010 RETURN\n");
-//        sbProgram.append("2000 PRINT \"At line 2000.\"\n");
-//        sbProgram.append("2010 END\n");
-//        sbProgram.append("2020 PRINT \"Shouldn't get here\"\n");
-//        InputStream programStream = new ByteArrayInputStream(sbProgram.toString().getBytes());
 
         ANTLRInputStream input = new ANTLRInputStream(programStream);
         BasicLexer lexer = new BasicLexer(input);
@@ -85,19 +59,7 @@ public class BasicInterpreterApp {
 
         NavigableMap<Integer, Statement> statements = visitor.getStatements();
 
-//        Integer currentLineNumber = statements.firstEntry().getKey();
-//
-//        Statement currentStatement = statements.get(currentLineNumber);
-//
-//        currentStatement.execute();
-
         Interpreter interpreter = new Interpreter();
         interpreter.executeProgram(statements);
-
-//        for (Statement statement : org.blinkenlights.basic.statements.values()) {
-//            statement.execute();
-//        }
-
-        //System.out.println(tree.toStringTree(parser));
     }
 }
