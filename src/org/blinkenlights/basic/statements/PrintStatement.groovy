@@ -3,11 +3,11 @@ package org.blinkenlights.basic.statements
 import org.blinkenlights.basic.ProgramState
 
 class PrintStatement implements Statement {
-    String arg
+    PrintArgument printArgument
 
     @Override
     void execute(ProgramState programState) {
-        println arg
+        println printArgument.toString(programState)
         programState.advanceLine()
     }
 }

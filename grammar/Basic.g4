@@ -16,11 +16,13 @@ gosubStatement : 'GOSUB' INT ;
 gotoStatement : 'GOTO' INT ;
 letStatement : 'LET' VARNAME '=' expression ;
 nextStatement : 'NEXT' VARNAME ;
-printStatement : 'PRINT' arg ;
+printStatement : 'PRINT' arg+ ;
 returnStatement : 'RETURN' ;
 
 //args : arg* ;
-arg : QUOTED_STRING | STRING | INT ;
+arg : QUOTED_STRING # printQuotedString
+    | expression # printExpression
+    ;
 expression : INT # value
            | expression '*' expression # multiplication
            | expression '/' expression # division
@@ -29,8 +31,6 @@ expression : INT # value
            | '(' expression ')' # parentheses
            ;
 
-//ADD : '+' ;
-//SUB : '-' ;
 VARNAME : [a-zA-Z][a-zA-Z0-9_]*? ;
 QUOTED_STRING : '"' ('\\"'|.)*? '"' ;
 STRING : [a-zA-Z]+ ;
