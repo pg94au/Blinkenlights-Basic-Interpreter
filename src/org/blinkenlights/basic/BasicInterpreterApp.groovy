@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.blinkenlights.basic.gen.BasicLexer;
 import org.blinkenlights.basic.gen.BasicParser;
 import org.blinkenlights.basic.statements.Statement
-import org.blinkenlights.basic.visitors.TreeVisitor
+import org.blinkenlights.basic.visitors.ProgramVisitor
 
 public class BasicInterpreterApp {
     public static void main(String[] args) throws Exception {
@@ -50,7 +50,7 @@ public class BasicInterpreterApp {
         BasicParser parser = new BasicParser(tokens);
         ParseTree tree = parser.program();
 
-        TreeVisitor visitor = new TreeVisitor();
+        ProgramVisitor visitor = new ProgramVisitor();
         visitor.visit(tree);
 
         System.out.println("Executing...");

@@ -11,10 +11,8 @@ import org.blinkenlights.basic.statements.NextStatement
 import org.blinkenlights.basic.statements.PrintStatement
 import org.blinkenlights.basic.statements.ReturnStatement
 import org.blinkenlights.basic.statements.Statement
-import org.blinkenlights.basic.visitors.ExpressionVisitor
-import org.blinkenlights.basic.visitors.PrintArgumentVisitor
 
-class TreeVisitor extends BasicBaseVisitor<String> {
+class ProgramVisitor extends BasicBaseVisitor<String> {
     def statements = new TreeMap<Integer, Statement>()
     int currentLineNumber
 
