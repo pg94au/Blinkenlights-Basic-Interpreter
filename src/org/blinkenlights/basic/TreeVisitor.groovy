@@ -1,11 +1,6 @@
 package org.blinkenlights.basic
 
-import org.blinkenlights.basic.expressions.AdditionExpression
-import org.blinkenlights.basic.expressions.DivisionExpression
 import org.blinkenlights.basic.expressions.Expression
-import org.blinkenlights.basic.expressions.MultiplicationExpression
-import org.blinkenlights.basic.expressions.NumberExpression
-import org.blinkenlights.basic.expressions.SubtractionExpression
 import org.blinkenlights.basic.gen.BasicBaseVisitor
 import org.blinkenlights.basic.gen.BasicParser
 import org.blinkenlights.basic.statements.EndStatement
@@ -70,7 +65,8 @@ class TreeVisitor extends BasicBaseVisitor<Expression> {
     @Override
     Expression visitLetStatement(BasicParser.LetStatementContext ctx) {
         def variableName = ctx.VARNAME().toString()
-        def expression = visit(ctx.expression())
+        def expressionVisitor = new ExpressionVisitor()
+        def expression = expressionVisitor.visit(ctx.expression())
         def letStatement = new LetStatement(variableName: variableName, expression: expression)
         statements[currentLineNumber] = letStatement
 
@@ -101,48 +97,5 @@ class TreeVisitor extends BasicBaseVisitor<Expression> {
         statements[currentLineNumber] = returnStatement
 
         super.visitReturnStatement(ctx)
-    }
-
-    @Override
-    Expression visitValue(BasicParser.ValueContext ctx) {
-        new NumberExpression(value: Integer.parseInt(ctx.INT().toString()))
-    }
-
-    @Override
-    Expression visitAddition(BasicParser.AdditionContext ctx) {
-        def left = visit(ctx.expression(0))
-        def right = visit(ctx.expression(1))
-
-        new AdditionExpression(left: left, right: right)
-    }
-
-    @Override
-    Expression visitSubtraction(BasicParser.SubtractionContext ctx) {
-        def left = visit(ctx.expression(0))
-        def right = visit(ctx.expression(1))
-
-        new SubtractionExpression(left: left, right: right)
-    }
-
-    @Override
-    Expression visitMultiplication(BasicParser.MultiplicationContext ctx) {
-        def left = visit(ctx.expression(0))
-        def right = visit(ctx.expression(1))
-
-        new MultiplicationExpression(left: left, right: right)
-    }
-
-    @Override
-    Expression visitDivision(BasicParser.DivisionContext ctx) {
-        def left = visit(ctx.expression(0))
-        def right = visit(ctx.expression(1))
-
-        new DivisionExpression(left: left, right: right)
-    }
-
-    @Override
-    Expression visitParentheses(BasicParser.ParenthesesContext ctx) {
-        def parentheses = visit(ctx.expression())
-        parentheses
     }
 }
