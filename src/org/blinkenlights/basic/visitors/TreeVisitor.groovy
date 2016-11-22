@@ -1,4 +1,4 @@
-package org.blinkenlights.basic
+package org.blinkenlights.basic.visitors
 
 import org.blinkenlights.basic.gen.BasicBaseVisitor
 import org.blinkenlights.basic.gen.BasicParser
@@ -8,10 +8,10 @@ import org.blinkenlights.basic.statements.GosubStatement
 import org.blinkenlights.basic.statements.GotoStatement
 import org.blinkenlights.basic.statements.LetStatement
 import org.blinkenlights.basic.statements.NextStatement
-import org.blinkenlights.basic.statements.PrintArgument
 import org.blinkenlights.basic.statements.PrintStatement
 import org.blinkenlights.basic.statements.ReturnStatement
 import org.blinkenlights.basic.statements.Statement
+import org.blinkenlights.basic.visitors.ExpressionVisitor
 import org.blinkenlights.basic.visitors.PrintArgumentVisitor
 
 class TreeVisitor extends BasicBaseVisitor<String> {

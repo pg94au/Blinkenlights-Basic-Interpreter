@@ -1,4 +1,4 @@
-package org.blinkenlights.basic
+package org.blinkenlights.basic.visitors
 
 import org.blinkenlights.basic.expressions.AdditionExpression
 import org.blinkenlights.basic.expressions.DivisionExpression

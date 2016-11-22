@@ -1,6 +1,5 @@
 package org.blinkenlights.basic.visitors
 
-import org.blinkenlights.basic.ExpressionVisitor
 import org.blinkenlights.basic.gen.BasicBaseVisitor
 import org.blinkenlights.basic.gen.BasicParser
 import org.blinkenlights.basic.statements.PrintArgument

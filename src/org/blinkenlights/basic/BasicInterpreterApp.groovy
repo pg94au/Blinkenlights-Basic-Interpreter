@@ -5,11 +5,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.blinkenlights.basic.gen.BasicLexer;
 import org.blinkenlights.basic.gen.BasicParser;
-import org.blinkenlights.basic.statements.Statement;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.NavigableMap;
+import org.blinkenlights.basic.statements.Statement
+import org.blinkenlights.basic.visitors.TreeVisitor
 
 public class BasicInterpreterApp {
     public static void main(String[] args) throws Exception {
