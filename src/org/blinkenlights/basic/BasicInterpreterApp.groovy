@@ -36,7 +36,8 @@ public class BasicInterpreterApp {
 20 GOSUB 1000
 30 PRINT "Returned from Subroutine"
 40 PRINT 123 + 234
-50 GOTO 2000
+50 PRINT "Hello" 123
+100 GOTO 2000
 1000 PRINT "In Subroutine"
 1010 RETURN
 2000 PRINT "At line 2000."

@@ -12,6 +12,7 @@ import org.blinkenlights.basic.statements.PrintArgument
 import org.blinkenlights.basic.statements.PrintStatement
 import org.blinkenlights.basic.statements.ReturnStatement
 import org.blinkenlights.basic.statements.Statement
+import org.blinkenlights.basic.visitors.PrintArgumentVisitor
 
 class TreeVisitor extends BasicBaseVisitor<String> {
     def statements = new TreeMap<Integer, Statement>()
@@ -83,25 +84,17 @@ class TreeVisitor extends BasicBaseVisitor<String> {
     }
 
     @Override
-    String visitPrintQuotedString(BasicParser.PrintQuotedStringContext ctx) {
-        def quotedString = ctx.QUOTED_STRING().text
-        quotedString = quotedString[1..-2]
-        def printArgument = new PrintArgument(quotedString)
-        def printStatement = new PrintStatement(printArgument: printArgument)
+    String visitPrintStatement(BasicParser.PrintStatementContext ctx) {
+        def printArgumentVisitor = new PrintArgumentVisitor()
+        def args = []
+        (0..ctx.childCount-2).each {
+            def arg = printArgumentVisitor.visit(ctx.arg(it))
+            args.add(arg)
+        }
+        def printStatement = new PrintStatement(printArguments: args)
         statements[currentLineNumber] = printStatement
 
-        return super.visitPrintQuotedString(ctx)
-    }
-
-    @Override
-    String visitPrintExpression(BasicParser.PrintExpressionContext ctx) {
-        def expressionVisitor = new ExpressionVisitor()
-        def expression = expressionVisitor.visit(ctx.expression())
-        def printArgument = new PrintArgument(expression)
-        def printStatement = new PrintStatement(printArgument: printArgument)
-        statements[currentLineNumber] = printStatement
-
-        return super.visitPrintExpression(ctx)
+        return super.visitPrintStatement(ctx)
     }
 
     @Override
