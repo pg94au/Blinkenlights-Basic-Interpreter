@@ -1,6 +1,5 @@
 package org.blinkenlights.basic
 
-import org.blinkenlights.basic.expressions.Expression
 import org.blinkenlights.basic.gen.BasicBaseVisitor
 import org.blinkenlights.basic.gen.BasicParser
 import org.blinkenlights.basic.statements.EndStatement
@@ -14,19 +13,19 @@ import org.blinkenlights.basic.statements.PrintStatement
 import org.blinkenlights.basic.statements.ReturnStatement
 import org.blinkenlights.basic.statements.Statement
 
-class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
+class TreeVisitor extends BasicBaseVisitor<String> {
     def statements = new TreeMap<Integer, Statement>()
     int currentLineNumber
 
     @Override
-    PrintArgument visitLineNum(BasicParser.LineNumContext ctx) {
+    String visitLineNum(BasicParser.LineNumContext ctx) {
         currentLineNumber = Integer.parseInt(ctx.INT().toString())
 
         super.visitLineNum(ctx)
     }
 
     @Override
-    PrintArgument visitEndStatement(BasicParser.EndStatementContext ctx) {
+    String visitEndStatement(BasicParser.EndStatementContext ctx) {
         def endStatement = new EndStatement()
         statements[currentLineNumber] = endStatement
 
@@ -34,7 +33,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitForStatement(BasicParser.ForStatementContext ctx) {
+    String visitForStatement(BasicParser.ForStatementContext ctx) {
         def variableName = ctx.VARNAME().toString()
         def fromValue = Integer.parseInt(ctx.INT(0).toString())
         def toValue = Integer.parseInt(ctx.INT(1).toString())
@@ -46,7 +45,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitGosubStatement(BasicParser.GosubStatementContext ctx) {
+    String visitGosubStatement(BasicParser.GosubStatementContext ctx) {
         def targetLineNumber = Integer.parseInt(ctx.INT().toString())
         def gosubStatement = new GosubStatement(targetLineNumber: targetLineNumber)
         statements[currentLineNumber] = gosubStatement
@@ -55,7 +54,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitGotoStatement(BasicParser.GotoStatementContext ctx) {
+    String visitGotoStatement(BasicParser.GotoStatementContext ctx) {
         def targetLineNumber = Integer.parseInt(ctx.INT().toString())
         def gotoStatement = new GotoStatement(targetLineNumber: targetLineNumber)
         statements[currentLineNumber] = gotoStatement
@@ -64,7 +63,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitLetStatement(BasicParser.LetStatementContext ctx) {
+    String visitLetStatement(BasicParser.LetStatementContext ctx) {
         def variableName = ctx.VARNAME().toString()
         def expressionVisitor = new ExpressionVisitor()
         def expression = expressionVisitor.visit(ctx.expression())
@@ -75,7 +74,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitNextStatement(BasicParser.NextStatementContext ctx) {
+    String visitNextStatement(BasicParser.NextStatementContext ctx) {
         def variableName = ctx.VARNAME().toString()
         def nextStatement = new NextStatement(variableName: variableName)
         statements[currentLineNumber] = nextStatement
@@ -84,7 +83,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitPrintQuotedString(BasicParser.PrintQuotedStringContext ctx) {
+    String visitPrintQuotedString(BasicParser.PrintQuotedStringContext ctx) {
         def quotedString = ctx.QUOTED_STRING().text
         quotedString = quotedString[1..-2]
         def printArgument = new PrintArgument(quotedString)
@@ -95,7 +94,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitPrintExpression(BasicParser.PrintExpressionContext ctx) {
+    String visitPrintExpression(BasicParser.PrintExpressionContext ctx) {
         def expressionVisitor = new ExpressionVisitor()
         def expression = expressionVisitor.visit(ctx.expression())
         def printArgument = new PrintArgument(expression)
@@ -106,7 +105,7 @@ class TreeVisitor extends BasicBaseVisitor<PrintArgument> {
     }
 
     @Override
-    PrintArgument visitReturnStatement(BasicParser.ReturnStatementContext ctx) {
+    String visitReturnStatement(BasicParser.ReturnStatementContext ctx) {
         def returnStatement = new ReturnStatement()
         statements[currentLineNumber] = returnStatement
 
