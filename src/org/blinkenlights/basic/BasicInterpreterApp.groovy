@@ -32,6 +32,7 @@ public class BasicInterpreterApp {
 17 LET G = 3 * ((8 / 2 + 4) * 5 - 2)
 19 LET FOO2 = 1024
 20 LET NEGATIVE = -512
+21 LET POSITIVE = NEGATIVE + 1024
 50 GOSUB 1000
 60 PRINT "Returned from Subroutine"
 70 PRINT 123 + 234
@@ -46,6 +47,7 @@ public class BasicInterpreterApp {
 2040 PRINT "G =", G
 2050 PRINT FOO2
 2060 PRINT "NEGATIVE =", NEGATIVE
+2070 PRINT "POSITIVE =", POSITIVE
 3000 END
 3010 PRINT "Shouldn't get here"
 """

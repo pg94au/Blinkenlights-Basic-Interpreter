@@ -26,6 +26,7 @@ arg : QUOTED_STRING # printQuotedString
     ;
 argSeparator : (','|';') ;
 expression : INT # value
+           | VARNAME # variable
            | expression '*' expression # multiplication
            | expression '/' expression # division
            | expression '+' expression # addition

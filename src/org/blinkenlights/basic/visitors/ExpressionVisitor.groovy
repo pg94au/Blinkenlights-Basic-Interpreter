@@ -6,6 +6,7 @@ import org.blinkenlights.basic.expressions.Expression
 import org.blinkenlights.basic.expressions.MultiplicationExpression
 import org.blinkenlights.basic.expressions.NumberExpression
 import org.blinkenlights.basic.expressions.SubtractionExpression
+import org.blinkenlights.basic.expressions.VariableExpression
 import org.blinkenlights.basic.gen.BasicBaseVisitor
 import org.blinkenlights.basic.gen.BasicParser
 
@@ -51,5 +52,10 @@ class ExpressionVisitor extends BasicBaseVisitor<Expression> {
     Expression visitParentheses(BasicParser.ParenthesesContext ctx) {
         def parentheses = visit(ctx.expression())
         parentheses
+    }
+
+    @Override
+    Expression visitVariable(BasicParser.VariableContext ctx) {
+        new VariableExpression(variableName: ctx.VARNAME().text)
     }
 }
