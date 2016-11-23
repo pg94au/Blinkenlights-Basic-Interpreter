@@ -22,6 +22,7 @@ returnStatement : 'RETURN' ;
 //args : arg* ;
 arg : QUOTED_STRING # printQuotedString
     | expression # printExpression
+    | VARNAME # printVariable
     ;
 argSeparator : (','|';') ;
 expression : INT # value
@@ -32,7 +33,7 @@ expression : INT # value
            | '(' expression ')' # parentheses
            ;
 
-VARNAME : [a-zA-Z][a-zA-Z0-9_]*? ;
+VARNAME : [a-zA-Z][a-zA-Z0-9_]* ;
 QUOTED_STRING : '"' ('\\"'|.)*? '"' ;
 STRING : [a-zA-Z]+ ;
 INT : [0-9]+ ;

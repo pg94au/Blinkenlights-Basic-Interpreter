@@ -6,21 +6,17 @@ import org.blinkenlights.basic.expressions.Expression
 class PrintArgument {
     String string
     Expression expression
-
-    PrintArgument(String string) {
-        this.string = string
-    }
-
-    PrintArgument(Expression expression) {
-        this.expression = expression
-    }
+    String variableName
 
     String toString(ProgramState programState) {
         if (string != null) {
             string
         }
-        else {
+        else if (expression != null) {
             expression.calculate(programState)
+        }
+        else {
+            programState.readVariable(variableName)
         }
     }
 }

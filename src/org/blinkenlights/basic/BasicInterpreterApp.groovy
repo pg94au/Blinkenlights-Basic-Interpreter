@@ -30,6 +30,7 @@ public class BasicInterpreterApp {
 15 LET E = 8 / 2
 16 LET F = 2 + (3 * 3)
 17 LET G = 3 * ((8 / 2 + 4) * 5 - 2)
+19 LET FOO2 = 1024
 20 GOSUB 1000
 30 PRINT "Returned from Subroutine"
 40 PRINT 123 + 234
@@ -41,6 +42,8 @@ public class BasicInterpreterApp {
 2010 PRINT "Space", "between"
 2020 PRINT "Nothing"; "between"
 2030 PRINT "Answer="; 42
+2040 PRINT "G =", G
+2050 PRINT FOO2
 3000 END
 3010 PRINT "Shouldn't get here"
 """

@@ -12,22 +12,32 @@ class PrintArgumentVisitor extends BasicBaseVisitor<String> {
     String visitPrintQuotedString(BasicParser.PrintQuotedStringContext ctx) {
         def quotedString = ctx.QUOTED_STRING().text
         quotedString = quotedString[1..-2]
-        def printArgument = new PrintArgument(quotedString)
+        def printArgument = new PrintArgument(string: quotedString)
 
         Arguments.add(printArgument)
 
-        printArgument
+        return super.visitPrintQuotedString(ctx)
     }
 
     @Override
     String visitPrintExpression(BasicParser.PrintExpressionContext ctx) {
         def expressionVisitor = new ExpressionVisitor()
         def expression = expressionVisitor.visit(ctx.expression())
-        def printArgument = new PrintArgument(expression)
+        def printArgument = new PrintArgument(expression: expression)
 
         Arguments.add(printArgument)
 
-        printArgument
+        return super.visitPrintExpression(ctx)
+    }
+
+    @Override
+    String visitPrintVariable(BasicParser.PrintVariableContext ctx) {
+        def variableName = ctx.VARNAME().text
+        def printArgument = new PrintArgument(variableName: variableName)
+
+        Arguments.add(printArgument)
+
+        return super.visitPrintVariable(ctx)
     }
 
     @Override
@@ -41,7 +51,7 @@ class PrintArgumentVisitor extends BasicBaseVisitor<String> {
                 separator = ''
                 break;
         }
-        def printArgument = new PrintArgument(separator)
+        def printArgument = new PrintArgument(string: separator)
 
         Arguments.add(printArgument)
 
