@@ -16,13 +16,14 @@ gosubStatement : 'GOSUB' INT ;
 gotoStatement : 'GOTO' INT ;
 letStatement : 'LET' VARNAME '=' expression ;
 nextStatement : 'NEXT' VARNAME ;
-printStatement : 'PRINT' arg+ ;
+printStatement : 'PRINT' arg (argSeparator arg)* ;
 returnStatement : 'RETURN' ;
 
 //args : arg* ;
 arg : QUOTED_STRING # printQuotedString
     | expression # printExpression
     ;
+argSeparator : (','|';') ;
 expression : INT # value
            | expression '*' expression # multiplication
            | expression '/' expression # division

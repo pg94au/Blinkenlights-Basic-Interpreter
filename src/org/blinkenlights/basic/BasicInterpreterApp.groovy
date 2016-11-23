@@ -33,13 +33,16 @@ public class BasicInterpreterApp {
 20 GOSUB 1000
 30 PRINT "Returned from Subroutine"
 40 PRINT 123 + 234
-50 PRINT "Hello" 123
+50 PRINT "Hello", 123
 100 GOTO 2000
 1000 PRINT "In Subroutine"
 1010 RETURN
 2000 PRINT "At line 2000."
-2010 END
-2020 PRINT "Shouldn't get here"
+2010 PRINT "Space", "between"
+2020 PRINT "Nothing"; "between"
+2030 PRINT "Answer="; 42
+3000 END
+3010 PRINT "Shouldn't get here"
 """
 
         def programStream = new ByteArrayInputStream(program.getBytes());

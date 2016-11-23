@@ -4,11 +4,11 @@ import org.blinkenlights.basic.ProgramState
 import org.blinkenlights.basic.expressions.Expression
 
 class PrintArgument {
-    String quotedString
+    String string
     Expression expression
 
-    PrintArgument(String quotedString) {
-        this.quotedString = quotedString
+    PrintArgument(String string) {
+        this.string = string
     }
 
     PrintArgument(Expression expression) {
@@ -16,8 +16,8 @@ class PrintArgument {
     }
 
     String toString(ProgramState programState) {
-        if (quotedString != null) {
-            quotedString
+        if (string != null) {
+            string
         }
         else {
             expression.calculate(programState)

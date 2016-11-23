@@ -84,11 +84,8 @@ class ProgramVisitor extends BasicBaseVisitor<String> {
     @Override
     String visitPrintStatement(BasicParser.PrintStatementContext ctx) {
         def printArgumentVisitor = new PrintArgumentVisitor()
-        def args = []
-        (0..ctx.childCount-2).each {
-            def arg = printArgumentVisitor.visit(ctx.arg(it))
-            args.add(arg)
-        }
+        printArgumentVisitor.visit(ctx)
+        def args = printArgumentVisitor.arguments
         def printStatement = new PrintStatement(printArguments: args)
         statements[currentLineNumber] = printStatement
 
