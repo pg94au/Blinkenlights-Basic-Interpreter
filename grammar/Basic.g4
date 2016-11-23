@@ -36,6 +36,6 @@ expression : INT # value
 VARNAME : [a-zA-Z][a-zA-Z0-9_]* ;
 QUOTED_STRING : '"' ('\\"'|.)*? '"' ;
 STRING : [a-zA-Z]+ ;
-INT : [0-9]+ ;
+INT : '-'?[0-9]+ ;
 WS : [ \t]+ -> skip;
 NEWLINE : '\r'? '\n' ;
