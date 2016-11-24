@@ -1,16 +1,16 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 class PrintStatement implements Statement {
     PrintArgument[] printArguments
 
     @Override
-    void execute(ProgramState programState) {
+    void execute(Interpreter interpreter) {
         printArguments.each {
-            print it.toString(programState)
+            print it.toString(interpreter)
         }
         println()
-        programState.advanceLine()
+        interpreter.advanceLine()
     }
 }

@@ -1,7 +1,7 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 interface Statement {
-    void execute(ProgramState programState);
+    void execute(Interpreter interpreter);
 }

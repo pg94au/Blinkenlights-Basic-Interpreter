@@ -1,6 +1,6 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 class ForStatement implements Statement {
     String variableName
@@ -8,7 +8,7 @@ class ForStatement implements Statement {
     int toValue
 
     @Override
-    void execute(ProgramState programState) {
-        programState.startFor(variableName, fromValue, toValue)
+    void execute(Interpreter interpreter) {
+        interpreter.startFor(variableName, fromValue, toValue)
     }
 }

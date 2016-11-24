@@ -1,12 +1,12 @@
 package org.blinkenlights.basic.expressions
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 class VariableExpression implements Expression {
     String variableName
 
     @Override
-    Integer calculate(ProgramState programState) {
-        programState.readVariable(variableName)
+    Integer calculate(Interpreter interpreter) {
+        interpreter.readVariable(variableName)
     }
 }

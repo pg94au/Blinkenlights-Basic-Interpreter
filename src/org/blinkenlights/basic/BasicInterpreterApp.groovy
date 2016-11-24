@@ -1,13 +1,5 @@
 package org.blinkenlights.basic;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.blinkenlights.basic.gen.BasicLexer;
-import org.blinkenlights.basic.gen.BasicParser;
-import org.blinkenlights.basic.statements.Statement
-import org.blinkenlights.basic.visitors.ProgramVisitor
-
 public class BasicInterpreterApp {
     public static void main(String[] args) throws Exception {
 //        String inputFile = null;
@@ -52,23 +44,7 @@ public class BasicInterpreterApp {
 3010 PRINT "Shouldn't get here"
 """
 
-        def programStream = new ByteArrayInputStream(program.getBytes());
-
-        ANTLRInputStream input = new ANTLRInputStream(programStream);
-        BasicLexer lexer = new BasicLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        BasicParser parser = new BasicParser(tokens);
-        ParseTree tree = parser.program();
-
-        ProgramVisitor visitor = new ProgramVisitor();
-        visitor.visit(tree);
-
-        System.out.println("Executing...");
-        System.out.println("-------------------------------");
-
-        NavigableMap<Integer, Statement> statements = visitor.getStatements();
-
-        Interpreter interpreter = new Interpreter();
-        interpreter.executeProgram(statements);
+        def interpreter = new Interpreter(program)
+        interpreter.executeProgram();
     }
 }

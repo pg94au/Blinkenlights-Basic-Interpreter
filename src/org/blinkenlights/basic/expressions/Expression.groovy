@@ -1,7 +1,7 @@
 package org.blinkenlights.basic.expressions
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 interface Expression {
-    Integer calculate(ProgramState programState)
+    Integer calculate(Interpreter interpreter)
 }

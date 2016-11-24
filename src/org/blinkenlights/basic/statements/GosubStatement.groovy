@@ -1,12 +1,12 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 class GosubStatement implements Statement {
     int targetLineNumber
 
     @Override
-    void execute(ProgramState programState) {
-        programState.gosubToLine(targetLineNumber)
+    void execute(Interpreter interpreter) {
+        interpreter.gosubToLine(targetLineNumber)
     }
 }

@@ -1,10 +1,10 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 
 class EndStatement implements Statement {
     @Override
-    void execute(ProgramState programState) {
-        programState.end()
+    void execute(Interpreter interpreter) {
+        interpreter.end()
     }
 }

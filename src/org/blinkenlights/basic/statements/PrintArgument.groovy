@@ -1,6 +1,6 @@
 package org.blinkenlights.basic.statements
 
-import org.blinkenlights.basic.ProgramState
+import org.blinkenlights.basic.Interpreter
 import org.blinkenlights.basic.expressions.Expression
 
 class PrintArgument {
@@ -8,15 +8,15 @@ class PrintArgument {
     Expression expression
     String variableName
 
-    String toString(ProgramState programState) {
+    String toString(Interpreter interpreter) {
         if (string != null) {
             string
         }
         else if (expression != null) {
-            expression.calculate(programState)
+            expression.calculate(interpreter)
         }
         else {
-            programState.readVariable(variableName)
+            interpreter.readVariable(variableName)
         }
     }
 }
