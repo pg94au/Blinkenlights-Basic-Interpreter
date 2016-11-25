@@ -14,6 +14,7 @@ statement : endStatement
           | gosubStatement
           | gotoStatement
           | ifStatement
+          | inputStatement
           | letStatement
           | nextStatement
           | printStatement
@@ -24,6 +25,7 @@ forStatement : 'FOR' VARNAME '=' INT 'TO' INT ;
 gosubStatement : 'GOSUB' INT ;
 gotoStatement : 'GOTO' INT ;
 ifStatement : 'IF' equation 'THEN' INT ;
+inputStatement : 'INPUT' VARNAME ;
 letStatement : 'LET' VARNAME '=' expression ;
 nextStatement : 'NEXT' VARNAME ;
 printStatement : 'PRINT' arg (argSeparator arg)* ;

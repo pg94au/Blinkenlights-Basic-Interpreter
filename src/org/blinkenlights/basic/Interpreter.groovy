@@ -8,19 +8,21 @@ class Interpreter {
     private int currentLineNumber;
     private Stack<ForState> forStack = []
     private Map<String, Integer> variables = [:]
-    OutputStream printStream
+    InputStream inputStream
+    PrintStream printStream
 
     Interpreter(String program) {
-        this(program, System.out)
+        this(program, System.in, System.out)
     }
 
-    Interpreter(String program, PrintStream printStream) {
+    Interpreter(String program, InputStream inputStream, OutputStream outputStream) {
         def programStream = new ByteArrayInputStream(program.bytes)
         def statementParser = new StatementParser()
         statements = statementParser.parse(programStream)
         stack.push(statements.firstEntry().key)
         currentLineNumber = statements.firstEntry().key
-        this.printStream = printStream
+        this.inputStream = inputStream
+        this.printStream = new PrintStream(outputStream)
     }
 
     def executeProgram() {
