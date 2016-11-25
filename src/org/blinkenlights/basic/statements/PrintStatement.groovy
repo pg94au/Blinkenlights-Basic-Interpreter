@@ -7,10 +7,10 @@ class PrintStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        printArguments.each {
-            print it.toString(interpreter)
+        printArguments.each { arg ->
+            interpreter.printStream.print(arg.toString(interpreter))
         }
-        println()
+        interpreter.printStream.println()
         interpreter.advanceLine()
     }
 }
