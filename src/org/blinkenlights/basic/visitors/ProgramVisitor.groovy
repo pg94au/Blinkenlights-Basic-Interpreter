@@ -6,6 +6,7 @@ import org.blinkenlights.basic.statements.EndStatement
 import org.blinkenlights.basic.statements.ForStatement
 import org.blinkenlights.basic.statements.GosubStatement
 import org.blinkenlights.basic.statements.GotoStatement
+import org.blinkenlights.basic.statements.IfStatement
 import org.blinkenlights.basic.statements.LetStatement
 import org.blinkenlights.basic.statements.NextStatement
 import org.blinkenlights.basic.statements.PrintStatement
@@ -59,6 +60,17 @@ class ProgramVisitor extends BasicBaseVisitor<String> {
         statements[currentLineNumber] = gotoStatement
 
         super.visitGotoStatement(ctx)
+    }
+
+    @Override
+    String visitIfStatement(BasicParser.IfStatementContext ctx) {
+        def equationVisitor = new EquationVisitor()
+        def equation = equationVisitor.visit(ctx.equation())
+        def targetLineNumber = Integer.parseInt(ctx.INT().toString())
+        def ifStatement = new IfStatement(equation: equation, targetLineNumber: targetLineNumber)
+        statements[currentLineNumber] = ifStatement
+
+        return super.visitIfStatement(ctx)
     }
 
     @Override

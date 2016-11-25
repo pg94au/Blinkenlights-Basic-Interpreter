@@ -9,11 +9,21 @@ program : (line NEWLINE | NEWLINE)* ;
 line : lineNum statement ;
 
 lineNum : INT ;
-statement : endStatement | forStatement | gosubStatement | gotoStatement | letStatement | nextStatement | printStatement | returnStatement ;
+statement : endStatement
+          | forStatement
+          | gosubStatement
+          | gotoStatement
+          | ifStatement
+          | letStatement
+          | nextStatement
+          | printStatement
+          | returnStatement
+          ;
 endStatement : 'END' ;
 forStatement : 'FOR' VARNAME '=' INT 'TO' INT ;
 gosubStatement : 'GOSUB' INT ;
 gotoStatement : 'GOTO' INT ;
+ifStatement : 'IF' equation 'THEN' INT ;
 letStatement : 'LET' VARNAME '=' expression ;
 nextStatement : 'NEXT' VARNAME ;
 printStatement : 'PRINT' arg (argSeparator arg)* ;
@@ -33,6 +43,13 @@ expression : INT # value
            | expression '-' expression # subtraction
            | '(' expression ')' # parentheses
            ;
+equation : expression '==' expression # equals
+         | expression '!=' expression # doesNotEqual
+         | expression '>' expression # greaterThan
+         | expression '<' expression # lessThan
+         | expression '>=' expression # greaterThanOrEqual
+         | expression '<=' expression # lessThanOrEqual
+         ;
 
 VARNAME : [a-zA-Z][a-zA-Z0-9_]* ;
 QUOTED_STRING : '"' ('\\"'|.)*? '"' ;
