@@ -12,7 +12,7 @@ class InputStatementTests extends Specification {
 
     def "Branches when two literal values that are equal are tested for equality"() {
         setup:
-        def inputStream = new ByteArrayInputStream(("123" + System.getProperty("line.separator")).bytes)
+        def inputStream = new ByteArrayInputStream("123".bytes)
         when:
         def interpreter = ExecuteProgram("""
             10 INPUT X
