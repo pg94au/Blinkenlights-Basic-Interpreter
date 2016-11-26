@@ -5,6 +5,12 @@ import org.blinkenlights.basic.Interpreter
 class ReturnStatement implements Statement {
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.returnFromGosub()
+        try {
+            interpreter.returnFromGosub()
+        }
+        catch (IllegalStateException) {
+            interpreter.printStream.println("! Call stack empty")
+            interpreter.stop()
+        }
     }
 }

@@ -7,6 +7,12 @@ class GotoStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.gotoLine(targetLineNumber)
+        try {
+            interpreter.gotoLine(targetLineNumber)
+        }
+        catch (IllegalArgumentException) {
+            interpreter.printStream.println("! Target line number $targetLineNumber does not exist")
+            interpreter.stop()
+        }
     }
 }

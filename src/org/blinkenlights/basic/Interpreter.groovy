@@ -10,6 +10,7 @@ class Interpreter {
     private Map<String, Integer> variables = [:]
     InputStream inputStream
     PrintStream printStream
+    boolean running = false
 
     Interpreter(String program) {
         this(program, System.in, System.out)
@@ -19,14 +20,15 @@ class Interpreter {
         def programStream = new ByteArrayInputStream(program.bytes)
         def statementParser = new StatementParser()
         statements = statementParser.parse(programStream)
-        stack.push(statements.firstEntry().key)
         currentLineNumber = statements.firstEntry().key
         this.inputStream = inputStream
         this.printStream = new PrintStream(outputStream)
     }
 
     def executeProgram() {
-        while (!finished()) {
+        running = true
+
+        while (running && !finished()) {
             def statement = statements.get(currentLineNumber);
 
             if (statement != null) {
@@ -35,12 +37,16 @@ class Interpreter {
         }
     }
 
+    def stop() {
+        running = false
+    }
+
     int end() {
         currentLineNumber = Integer.MAX_VALUE
     }
 
     boolean finished() {
-        stack.empty() || currentLineNumber == Integer.MAX_VALUE
+        currentLineNumber == Integer.MAX_VALUE
     }
 
     def advanceLine() {
@@ -53,17 +59,32 @@ class Interpreter {
     }
 
     def gotoLine(int targetLine) {
-        currentLineNumber = targetLine;
+        if (statements.containsKey(targetLine)) {
+            currentLineNumber = targetLine;
+        }
+        else {
+            throw new IllegalArgumentException()
+        }
     }
 
     def gosubToLine(int targetLine) {
-        stack.push(currentLineNumber)
-        currentLineNumber = targetLine
+        if (statements.containsKey(targetLine)) {
+            stack.push(currentLineNumber)
+            currentLineNumber = targetLine
+        }
+        else {
+            throw new IllegalArgumentException()
+        }
     }
 
     def returnFromGosub() {
-        currentLineNumber = stack.pop()
-        advanceLine()
+        if (!stack.empty()) {
+            currentLineNumber = stack.pop()
+            advanceLine()
+        }
+        else {
+            throw new IllegalStateException()
+        }
     }
 
     def startFor(String variableName, int fromValue, int toValue) {

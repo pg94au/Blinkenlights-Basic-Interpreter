@@ -7,6 +7,12 @@ class GosubStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.gosubToLine(targetLineNumber)
+        try {
+            interpreter.gosubToLine(targetLineNumber)
+        }
+        catch (IllegalArgumentException) {
+            interpreter.printStream.println("! Target line number $targetLineNumber does not exist")
+            interpreter.stop()
+        }
     }
 }
