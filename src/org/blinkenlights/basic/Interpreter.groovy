@@ -67,24 +67,17 @@ class Interpreter {
         }
     }
 
-    def gosubToLine(int targetLine) {
-        if (statements.containsKey(targetLine)) {
-            stack.push(currentLineNumber)
-            currentLineNumber = targetLine
-        }
-        else {
-            throw new IllegalArgumentException()
-        }
-    }
-
-    def returnFromGosub() {
+    def popLineNumber() {
         if (!stack.empty()) {
             currentLineNumber = stack.pop()
-            advanceLine()
         }
         else {
             throw new IllegalStateException()
         }
+    }
+
+    def pushLineNumber() {
+        stack.push(currentLineNumber)
     }
 
     def startFor(String variableName, int fromValue, int toValue) {
