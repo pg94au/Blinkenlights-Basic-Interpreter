@@ -10,6 +10,12 @@ class ForAndNextStatementTests extends Specification {
         interpreter
     }
 
+    def ExecuteProgram(statements, outputStream) {
+        def interpreter = new Interpreter(statements, System.in, outputStream)
+        interpreter.executeProgram()
+        interpreter
+    }
+
     def "Can construct loop that repeats statements"() {
         when:
         def interpreter = ExecuteProgram("""
@@ -38,5 +44,24 @@ class ForAndNextStatementTests extends Specification {
         with (interpreter.variables) {
             X == 5
         }
+    }
+
+    def "Mismatched next statement stops execution and prints error"() {
+        setup:
+        def outputStream = new ByteArrayOutputStream()
+        when:
+        def interpreter = ExecuteProgram("""
+            10 LET X = 1 
+            20 FOR Y = 1 TO 5
+            30 LET X = X + 1
+            40 NEXT Z
+            50 LET X = 123
+            60 END
+            """, new PrintStream(outputStream))
+        then:
+        with (interpreter.variables) {
+            X == 2
+        }
+        outputStream.toByteArray().length > 0
     }
 }

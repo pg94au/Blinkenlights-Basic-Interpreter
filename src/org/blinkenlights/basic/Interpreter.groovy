@@ -98,15 +98,18 @@ class Interpreter {
     def nextFor(String variableName) {
         def currentForState = forStack.peek()
         if (currentForState.variableName != variableName) {
-            throw new Exception("FOR and NEXT variable name mismatch.  Expected $currentForState.variableName, got $variableName")
-        }
-        variables[variableName] = variables[variableName] + 1
-        if (variables[variableName] <= currentForState.toValue) {
-            currentLineNumber = currentForState.startingLineNumber
+            printStream.println("! FOR and NEXT variable name mismatch.  Expected $currentForState.variableName, got $variableName")
+            stop()
         }
         else {
-            forStack.pop()
-            advanceLine()
+            variables[variableName] = variables[variableName] + 1
+            if (variables[variableName] <= currentForState.toValue) {
+                currentLineNumber = currentForState.startingLineNumber
+            }
+            else {
+                forStack.pop()
+                advanceLine()
+            }
         }
     }
 
