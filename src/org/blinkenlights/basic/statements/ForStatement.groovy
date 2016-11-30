@@ -9,6 +9,9 @@ class ForStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.startFor(variableName, fromValue, toValue)
+        interpreter.writeVariable(variableName, fromValue)
+        interpreter.advanceLine()
+        def forState = interpreter.createForState(variableName, toValue)
+        interpreter.pushForLoop(forState)
     }
 }

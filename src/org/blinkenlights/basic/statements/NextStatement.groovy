@@ -7,6 +7,23 @@ class NextStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.nextFor(variableName)
+        def forState = interpreter.popForLoop()
+        if (variableName != forState.variableName) {
+            interpreter.printStream.println("! FOR and NEXT variable name mismatch.  Expected $forState.variableName, got $variableName")
+            interpreter.stop()
+            return
+        }
+
+        def loopValue = interpreter.readVariable(variableName)
+        loopValue++
+        interpreter.writeVariable(variableName, loopValue)
+
+        if (loopValue <= forState.limit) {
+            interpreter.pushForLoop(forState)
+            interpreter.gotoLine(forState.startingLineNumber)
+        }
+        else {
+            interpreter.advanceLine()
+        }
     }
 }

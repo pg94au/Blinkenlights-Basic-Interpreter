@@ -38,6 +38,7 @@ class Interpreter {
     }
 
     def stop() {
+        printStream.println("! Stopped at line $currentLineNumber")
         running = false
     }
 
@@ -80,30 +81,16 @@ class Interpreter {
         stack.push(currentLineNumber)
     }
 
-    def startFor(String variableName, int fromValue, int toValue) {
-        def startingLineNumber = statements.higherKey(currentLineNumber)
-        def forState = new ForState(variableName: variableName, toValue: toValue, startingLineNumber: startingLineNumber)
-        forStack.push(forState)
-        variables[variableName] = fromValue
-        advanceLine()
+    def createForState(String variableName, int limit) {
+        new ForState(variableName: variableName, limit: limit, startingLineNumber: currentLineNumber)
     }
 
-    def nextFor(String variableName) {
-        def currentForState = forStack.peek()
-        if (currentForState.variableName != variableName) {
-            printStream.println("! FOR and NEXT variable name mismatch.  Expected $currentForState.variableName, got $variableName")
-            stop()
-        }
-        else {
-            variables[variableName] = variables[variableName] + 1
-            if (variables[variableName] <= currentForState.toValue) {
-                currentLineNumber = currentForState.startingLineNumber
-            }
-            else {
-                forStack.pop()
-                advanceLine()
-            }
-        }
+    def pushForLoop(ForState forState) {
+        forStack.push(forState)
+    }
+
+    def popForLoop() {
+        forStack.pop()
     }
 
     Integer readVariable(String variableName) {
