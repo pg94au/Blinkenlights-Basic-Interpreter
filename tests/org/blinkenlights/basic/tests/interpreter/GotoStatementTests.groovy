@@ -11,7 +11,7 @@ class GotoStatementTests extends Specification {
     }
 
     def ExecuteProgram(statements, outputStream) {
-        def interpreter = new Interpreter(statements, System.in, outputStream)
+        def interpreter = new Interpreter(statements, System.in, new ByteArrayOutputStream(), outputStream)
         interpreter.executeProgram()
         interpreter
     }

@@ -10,19 +10,21 @@ class Interpreter {
     private Map<String, Integer> variables = [:]
     InputStream inputStream
     PrintStream printStream
+    PrintStream errorStream
     boolean running = false
 
     Interpreter(String program) {
-        this(program, System.in, System.out)
+        this(program, System.in, System.out, System.err)
     }
 
-    Interpreter(String program, InputStream inputStream, OutputStream outputStream) {
+    Interpreter(String program, InputStream inputStream, OutputStream outputStream, OutputStream errorStream) {
         def programStream = new ByteArrayInputStream(program.bytes)
         def statementParser = new StatementParser()
         statements = statementParser.parse(programStream)
         currentLineNumber = statements.firstEntry().key
         this.inputStream = inputStream
         this.printStream = new PrintStream(outputStream)
+        this.errorStream = new PrintStream(errorStream)
     }
 
     def executeProgram() {
@@ -38,7 +40,7 @@ class Interpreter {
     }
 
     def stop() {
-        printStream.println("! Stopped at line $currentLineNumber")
+        errorStream.println("! Stopped at line $currentLineNumber")
         running = false
     }
 

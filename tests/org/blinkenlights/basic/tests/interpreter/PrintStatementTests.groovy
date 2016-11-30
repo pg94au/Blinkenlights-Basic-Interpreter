@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class PrintStatementTests extends Specification {
     def ExecuteProgram(statements, outputStream) {
-        def interpreter = new Interpreter(statements, System.in, outputStream)
+        def interpreter = new Interpreter(statements, System.in, outputStream, new ByteArrayOutputStream())
         interpreter.executeProgram()
     }
 
