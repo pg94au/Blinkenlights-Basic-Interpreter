@@ -8,6 +8,7 @@ program : (line NEWLINE | NEWLINE)* ;
 
 line : lineNum statement ;
 
+// ProgramVisitor
 lineNum : INT ;
 statement : endStatement
           | forStatement
@@ -31,12 +32,14 @@ nextStatement : 'NEXT' VARNAME ;
 printStatement : 'PRINT' arg (argSeparator arg)* ;
 returnStatement : 'RETURN' ;
 
-//args : arg* ;
+// PrintArgumentVisitor
 arg : QUOTED_STRING # printQuotedString
     | expression # printExpression
     | VARNAME # printVariable
     ;
 argSeparator : (','|';') ;
+
+// ExpressionVisitor
 expression : INT # value
            | VARNAME # variable
            | expression '*' expression # multiplication
@@ -45,6 +48,8 @@ expression : INT # value
            | expression '-' expression # subtraction
            | '(' expression ')' # parentheses
            ;
+
+// EquationVisitor
 equation : expression '==' expression # equals
          | expression '!=' expression # doesNotEqual
          | expression '>' expression # greaterThan

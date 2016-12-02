@@ -8,23 +8,32 @@ class Interpreter {
     private int currentLineNumber;
     private Stack<ForState> forStack = []
     private Map<String, Integer> variables = [:]
+    private boolean running = false
     InputStream inputStream
     PrintStream printStream
     PrintStream errorStream
-    boolean running = false
 
     Interpreter(String program) {
         this(program, System.in, System.out, System.err)
     }
 
     Interpreter(String program, InputStream inputStream, OutputStream outputStream, OutputStream errorStream) {
-        def programStream = new ByteArrayInputStream(program.bytes)
-        def statementParser = new StatementParser()
-        statements = statementParser.parse(programStream)
+        this(parseStatementsFromProgramText(program), inputStream, outputStream, errorStream)
+    }
+
+    Interpreter(NavigableMap<Integer, Statement> statements, InputStream inputStream, OutputStream outputStream, OutputStream errorStream) {
+        this.statements = statements
         currentLineNumber = statements.firstEntry().key
         this.inputStream = inputStream
         this.printStream = new PrintStream(outputStream)
         this.errorStream = new PrintStream(errorStream)
+    }
+
+    static NavigableMap<Integer, Statement> parseStatementsFromProgramText(String program) {
+        def programStream = new ByteArrayInputStream(program.bytes)
+        def statementParser = new StatementParser()
+        def statements = statementParser.parse(programStream)
+        statements
     }
 
     def executeProgram() {
