@@ -9,7 +9,7 @@ class Interpreter {
     private Stack<ForState> forStack = []
     private Map<String, Integer> variables = [:]
     private boolean running = false
-    InputStream inputStream
+    BufferedReader inputReader
     PrintStream printStream
     PrintStream errorStream
 
@@ -24,7 +24,7 @@ class Interpreter {
     Interpreter(NavigableMap<Integer, Statement> statements, InputStream inputStream, OutputStream outputStream, OutputStream errorStream) {
         this.statements = statements
         currentLineNumber = statements.firstEntry().key
-        this.inputStream = inputStream
+        this.inputReader = inputStream.newReader()
         this.printStream = new PrintStream(outputStream)
         this.errorStream = new PrintStream(errorStream)
     }

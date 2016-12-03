@@ -11,7 +11,7 @@ class InputStatementTests extends Specification {
         interpreter
     }
 
-    def "Branches when two literal values that are equal are tested for equality"() {
+    def "Can input a value from input stream and store in a variable"() {
         setup:
         def inputStream = new ByteArrayInputStream("123".bytes)
         when:
@@ -21,6 +21,21 @@ class InputStatementTests extends Specification {
         then:
         with (interpreter.variables) {
             X == 123
+        }
+    }
+
+    def "Can call input more than once"() {
+        setup:
+        def inputStream = new ByteArrayInputStream("123\r\n234".bytes)
+        when:
+        def interpreter = ExecuteProgram("""
+            10 INPUT X
+            20 INPUT Y
+            """, inputStream)
+        then:
+        with (interpreter.variables) {
+            X == 123
+            Y == 234
         }
     }
 }
