@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/basic-interpreter.iml" filepath="$PROJECT_DIR$/.idea/basic-interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter_main.iml" group="basic-interpreter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter_test.iml" group="basic-interpreter" />
     </modules>
   </component>
 </project>

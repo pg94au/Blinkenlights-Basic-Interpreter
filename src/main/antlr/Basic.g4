@@ -1,9 +1,5 @@
 grammar Basic;
 
-@header {
-package org.blinkenlights.basic.gen;
-}
-
 program : (line NEWLINE | NEWLINE)* ;
 
 line : lineNum statement ;
