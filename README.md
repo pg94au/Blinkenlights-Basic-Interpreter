@@ -1,6 +1,8 @@
 # Blinkenlights Basic Interpreter
 
 This project is the result of my interest in learning something about [ANTLR](http://www.antlr.org/).  It is an implementation of an interpreter based on the simple BASIC syntax of the past.  It is not intended as it is to be a useful programming language to write anything in, but potentially as a demonstration that could be adapted to implement genuinely useful DSLs.
+
+For more details about this project, see [here](http://pg94au.blogspot.com/2016/12/adventures-with-antlr4.html).
 #
 #
 #
