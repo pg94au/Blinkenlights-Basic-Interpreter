@@ -10,7 +10,7 @@ class Interpreter {
     private Map<String, Integer> variables = [:]
     private boolean running = false
     BufferedReader inputReader
-    PrintStream printStream
+    PrintStream outputStream
     PrintStream errorStream
 
     Interpreter(String program) {
@@ -25,7 +25,7 @@ class Interpreter {
         this.statements = statements
         currentLineNumber = statements.firstEntry().key
         this.inputReader = inputStream.newReader()
-        this.printStream = new PrintStream(outputStream)
+        this.outputStream = new PrintStream(outputStream)
         this.errorStream = new PrintStream(errorStream)
     }
 

@@ -10,7 +10,7 @@ class ReturnStatement implements Statement {
             interpreter.advanceLine()
         }
         catch (IllegalStateException) {
-            interpreter.printStream.println("! Call stack empty")
+            interpreter.outputStream.println("! Call stack empty")
             interpreter.stop()
         }
     }

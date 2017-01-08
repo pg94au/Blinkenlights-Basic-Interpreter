@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter_main.iml" group="basic-interpreter" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basic-interpreter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/basic-interpreter_test.iml" group="basic-interpreter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter.iml" filepath="$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter_main.iml" group="blinkenlights-basic-interpreter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/blinkenlights-basic-interpreter_test.iml" group="blinkenlights-basic-interpreter" />
     </modules>
   </component>
 </project>

@@ -11,7 +11,7 @@ class GotoStatement implements Statement {
             interpreter.gotoLine(targetLineNumber)
         }
         catch (IllegalArgumentException) {
-            interpreter.printStream.println("! Target line number $targetLineNumber does not exist")
+            interpreter.outputStream.println("! Target line number $targetLineNumber does not exist")
             interpreter.stop()
         }
     }

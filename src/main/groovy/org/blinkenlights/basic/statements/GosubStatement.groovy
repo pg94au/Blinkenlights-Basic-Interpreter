@@ -12,7 +12,7 @@ class GosubStatement implements Statement {
             interpreter.gotoLine(targetLineNumber)
         }
         catch (IllegalArgumentException) {
-            interpreter.printStream.println("! Target line number $targetLineNumber does not exist")
+            interpreter.errorStream.println("! Target line number $targetLineNumber does not exist")
             interpreter.stop()
         }
     }

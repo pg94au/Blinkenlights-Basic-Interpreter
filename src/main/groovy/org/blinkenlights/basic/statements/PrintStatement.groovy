@@ -8,9 +8,9 @@ class PrintStatement implements Statement {
     @Override
     void execute(Interpreter interpreter) {
         printArguments.each { arg ->
-            interpreter.printStream.print(arg.toString(interpreter))
+            interpreter.outputStream.print(arg.toString(interpreter))
         }
-        interpreter.printStream.println()
+        interpreter.outputStream.println()
         interpreter.advanceLine()
     }
 }

@@ -10,8 +10,8 @@ class GosubAndReturnStatementTests extends Specification {
         interpreter
     }
 
-    def ExecuteProgram(statements, outputStream) {
-        def interpreter = new Interpreter(statements, System.in, new ByteArrayOutputStream(), outputStream)
+    def ExecuteProgram(statements, errorStream) {
+        def interpreter = new Interpreter(statements, System.in, new ByteArrayOutputStream(), errorStream)
         interpreter.executeProgram()
         interpreter
     }
@@ -33,35 +33,35 @@ class GosubAndReturnStatementTests extends Specification {
 
     def "Calling to non-existent line stops execution and prints an error"() {
         setup:
-        def outputStream = new ByteArrayOutputStream()
+        def errorStream = new ByteArrayOutputStream()
         when:
         def interpreter = ExecuteProgram("""
             10 LET X = 1 
             20 GOSUB 50
             30 LET X = 123
             40 END
-            """, new PrintStream(outputStream))
+            """, new PrintStream(errorStream))
         then:
         with (interpreter.variables) {
             X == 1
         }
-        outputStream.toByteArray().length > 0
+        errorStream.toByteArray().length > 0
     }
 
     def "Return without gosub stops execution and prints an error"() {
         setup:
-        def outputStream = new ByteArrayOutputStream()
+        def errorStream = new ByteArrayOutputStream()
         when:
         def interpreter = ExecuteProgram("""
             10 LET X = 1
             20 RETURN
             30 LET X = 123
             40 END
-            """, new PrintStream(outputStream))
+            """, new PrintStream(errorStream))
         then:
         with (interpreter.variables) {
             X == 1
         }
-        outputStream.toByteArray().length > 0
+        errorStream.toByteArray().length > 0
     }
 }

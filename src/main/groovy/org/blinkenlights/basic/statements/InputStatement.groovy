@@ -7,7 +7,7 @@ class InputStatement implements Statement {
 
     @Override
     void execute(Interpreter interpreter) {
-        interpreter.printStream.print("? ")
+        interpreter.outputStream.print("? ")
         def input = interpreter.inputReader.readLine()
         def value = Integer.parseInt(input)
         interpreter.writeVariable(variableName, value)

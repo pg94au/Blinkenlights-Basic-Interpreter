@@ -9,7 +9,7 @@ class NextStatement implements Statement {
     void execute(Interpreter interpreter) {
         def forState = interpreter.popForLoop()
         if (variableName != forState.variableName) {
-            interpreter.printStream.println("! FOR and NEXT variable name mismatch.  Expected $forState.variableName, got $variableName")
+            interpreter.outputStream.println("! FOR and NEXT variable name mismatch.  Expected $forState.variableName, got $variableName")
             interpreter.stop()
             return
         }
