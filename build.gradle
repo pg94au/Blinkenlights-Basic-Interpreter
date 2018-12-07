@@ -39,3 +39,11 @@ task fatJar(type: Jar) {
 artifacts {
     archives fatJar
 }
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        showExceptions true
+        showStackTraces true
+    }
+}
